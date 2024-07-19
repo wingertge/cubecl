@@ -114,6 +114,19 @@ pub fn test_matmul_tiling2d_with_batches<R: Runtime>(device: &R::Device) {
     .test_tiling2d::<R>(device);
 }
 
+pub fn test_matmul_cmma_huge<R: Runtime>(device: &R::Device) {
+    MatmulTestCase {
+        m: 2048,
+        k: 2048,
+        n: 2048,
+        batch: 3,
+        factor: 1000000.,
+        epsilon: 0.1,
+        compute_f16: true,
+    }
+    .test_cmma::<R>(device);
+}
+
 struct MatmulTestCase {
     m: usize,
     k: usize,
