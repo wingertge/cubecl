@@ -84,3 +84,9 @@ mod tch_gpu {
     }
 }
 ```
+
+### Command line
+
+```bash
+/usr/local/NVIDIA-Nsight-Compute-2024.2/ncu --config-file off --export ./target/release/matmul-example --force-overwrite ./target/release/matmul-example
+```

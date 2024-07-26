@@ -14,5 +14,6 @@ burn = { git = "https://github.com/tracel-ai/burn", optional = true, features = 
 burn-tensor = { git = "https://github.com/tracel-ai/burn", optional = true }
 
 [features]
+default = ["cube-cuda"]
 burn-tch-cuda = ["burn"]
 cube-cuda = ["cubecl"]
