@@ -301,6 +301,11 @@ impl Item {
             vectorization,
         }
     }
+
+    pub fn size(&self) -> usize {
+        let elem_size = self.elem.size();
+        elem_size * self.vectorization.map(|it| it.get()).unwrap_or(1) as usize
+    }
 }
 
 impl Display for Item {

@@ -217,7 +217,7 @@ impl WgpuStream {
         for (buffer, offset, size) in buffers {
             // Copying into a buffer has to be 4 byte aligned. We can safely do so, as
             // memory is 32 bytes aligned (see WgpuStorage).
-            let align = wgpu::COPY_BUFFER_ALIGNMENT;
+            let align = 8;
             let aligned_len = size.div_ceil(align) * align;
 
             let staging_buffer = self.device.create_buffer(&wgpu::BufferDescriptor {
@@ -449,7 +449,7 @@ impl WgpuStream {
 
         // Copying into a buffer has to be 4 byte aligned. We can safely do so, as
         // memory is 32 bytes aligned (see WgpuStorage).
-        let align = wgpu::COPY_BUFFER_ALIGNMENT;
+        let align = 8;
         let aligned_len = num_bytes.div_ceil(align) * align;
 
         // If the data is small enough, we assume we're creating some kind of uniform buffer,

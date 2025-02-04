@@ -80,7 +80,7 @@ impl ComputeStorage for WgpuStorage {
     // See: https://github.com/gfx-rs/wgpu/issues/3508
     // NB: cudamalloc and co. actually align to _256_ bytes. Worth
     // trying this in the future to see if it reduces memory coalescing.
-    const ALIGNMENT: u64 = 32;
+    const ALIGNMENT: u64 = 64;
 
     fn get(&mut self, handle: &StorageHandle) -> Self::Resource {
         let buffer = self.memory.get(&handle.id).unwrap();

@@ -138,11 +138,25 @@ impl<C: WgpuCompiler> ComputeServer for WgpuServer<C> {
     /// This is important, otherwise the compute passes are going to be too small and we won't be able to
     /// fully utilize the GPU.
     fn create(&mut self, data: &[u8]) -> server::Handle {
-        Handle::new(self.stream.create(data), None, None, data.len() as u64)
+        let num_bytes = data.len() as u64;
+
+        // Copying into a buffer has to be 4 byte aligned. We can safely do so, as
+        // memory is 32 bytes aligned (see WgpuStorage).
+        let align = 8;
+        let aligned_len = num_bytes.div_ceil(align) * align;
+
+        Handle::new(self.stream.create(data), None, None, aligned_len)
     }
 
     fn empty(&mut self, size: usize) -> server::Handle {
-        Handle::new(self.stream.empty(size as u64), None, None, size as u64)
+        let num_bytes = size as u64;
+
+        // Copying into a buffer has to be 4 byte aligned. We can safely do so, as
+        // memory is 32 bytes aligned (see WgpuStorage).
+        let align = 8;
+        let aligned_len = num_bytes.div_ceil(align) * align;
+
+        Handle::new(self.stream.empty(aligned_len), None, None, aligned_len)
     }
 
     unsafe fn execute(

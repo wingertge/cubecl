@@ -5,7 +5,7 @@ use super::{shader::ComputeShader, ConstantArray};
 use super::{Item, LocalArray, SharedMemory};
 use crate::{
     compiler::{base::WgpuCompiler, wgsl},
-    WgpuServer,
+    WgpuServer, WgpuStorage,
 };
 
 use cubecl_common::ExecutionMode;
@@ -16,7 +16,7 @@ use cubecl_core::{
     server::ComputeServer,
     Feature, Metadata,
 };
-use cubecl_runtime::DeviceProperties;
+use cubecl_runtime::{storage::ComputeStorage, DeviceProperties};
 use wgpu::{
     BindGroupLayoutDescriptor, BindGroupLayoutEntry, BindingType, BufferBindingType,
     ComputePipeline, DeviceDescriptor, PipelineLayoutDescriptor, ShaderModuleDescriptor,
@@ -160,7 +160,7 @@ impl WgpuCompiler for WgslCompiler {
                 .device
                 .create_compute_pipeline(&wgpu::ComputePipelineDescriptor {
                     label: None,
-                    layout: layout.as_ref(),
+                    layout: None,
                     module: &module,
                     entry_point: Some(&kernel.entrypoint_name),
                     compilation_options: wgpu::PipelineCompilationOptions {
