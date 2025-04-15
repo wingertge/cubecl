@@ -13,7 +13,6 @@ version.workspace = true
 [features]
 cache-ptx = ["cubecl-common/cache"]
 compilation-cache = ["cubecl-common/cache"]
-compilation-cache = ["cubecl-common/cache"]
 default = [
     "std",
     "cubecl-runtime/default",
