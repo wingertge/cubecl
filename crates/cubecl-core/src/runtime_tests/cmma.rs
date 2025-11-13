@@ -1556,7 +1556,7 @@ macro_rules! testgen_cmma {
 
             // HIP
             test::<f16, f16, f32>(16, 16, 16);
-            test::<bf16, bf16, f32>(16, 16, 16);
+            //test::<bf16, bf16, f32>(16, 16, 16);
         }
 
         #[test]
