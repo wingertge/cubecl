@@ -569,7 +569,7 @@ pub(super) fn compile_manual_mma<D: Dialect>(
 
 pub(super) fn supported_mma_combinations(arch: &AMDArchitecture) -> SupportedMmaCombinations {
     // Correctness is wrong.
-    const ENABLED: bool = false;
+    const ENABLED: bool = true;
 
     if !ENABLED {
         return Vec::new();
