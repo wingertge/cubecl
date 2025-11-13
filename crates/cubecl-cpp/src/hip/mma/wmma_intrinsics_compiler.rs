@@ -571,7 +571,7 @@ pub(super) fn compile_manual_mma<D: Dialect>(
         "{name}({frag_a_tmp}, {frag_b_tmp}, {frag_c_tmp}, {frag_d_tmp});"
     )?;
 
-    for i in 0..frag_d_len {
+    for _ in 0..frag_d_len {
         writeln!(f, "memcpy({frag_d}, &{frag_d_tmp}, sizeof({frag_d_tmp}));")?;
     }
 
